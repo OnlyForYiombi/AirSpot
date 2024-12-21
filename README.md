@@ -1,0 +1,2 @@
+# WeatherSpot
+WeatherSpot project
