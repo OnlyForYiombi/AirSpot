@@ -1,25 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import MapComponent from './MapComponent';
 import { firestore } from "./firebase";
-import { useEffect } from 'react';
+import { collection, getDocs } from "firebase/firestore";
 
 function App() {
-  // Firestore와 관련된 동작을 useEffect에서 실행
   useEffect(() => {
     console.log("Firestore 인스턴스:", firestore);
 
-    // 예를 들어, Firestore 컬렉션 데이터 가져오기
-    // 아래는 Firestore에서 데이터를 읽는 예제입니다.
-    // import { collection, getDocs } from "firebase/firestore";
-    // const fetchData = async () => {
-    //   const querySnapshot = await getDocs(collection(firestore, "your-collection-name"));
-    //   querySnapshot.forEach((doc) => {
-    //     console.log(`${doc.id} =>`, doc.data());
-    //   });
-    // };
-    // fetchData();
+    // "nodes" 컬렉션 가져오기
+    const nodeCollection = collection(firestore, "nodes");
 
-  }, []); // 빈 배열을 의존성으로 추가하여 useEffect가 한 번만 실행되도록 설정
+    // Firestore에서 데이터 가져오기
+    const fetchNodes = async () => {
+        const querySnapshot = await getDocs(nodeCollection);
+        querySnapshot.forEach((doc) => { //사용하여 각 문서를 순회하며 데이터를 출력합니다.
+          // document 데이터와 ID 출력 
+          console.log("Document ID:", doc.id);
+          console.log("Document Data:", doc.data());
+        });
+    };
+
+    fetchNodes(); // 데이터 가져오는 함수 실행
+  }, []); // 빈 배열로 초기 렌더링 시 한 번만 실행
 
   return (
     <div className="App">
