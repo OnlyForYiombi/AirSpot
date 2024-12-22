@@ -32,3 +32,23 @@ function App() {
 }
 
 export default App;
+
+/*
+import { collection, addDoc } from "firebase/firestore";
+import { firestore } from "./firebase";
+
+const addTestData = async () => {
+  try {
+    const docRef = await addDoc(collection(firestore, "nodes"), {
+      name: "Test Node",
+      value: 42,
+    });
+    console.log("Document written with ID:", docRef.id);
+  } catch (error) {
+    console.error("Error adding document:", error);
+  }
+};
+
+addTestData();
+firebase에 데이터 추가하는 방법
+*/
