@@ -3,6 +3,8 @@ import dummy from "./dummy";
 import "./Map.css";
 
 function MyMap() {
+  // Google Maps API 로드 대기
+  // useEffect는 컴포넌트가 처음 렌더링된 후 실행되며, initMap 함수는 지도와 히트맵을 초기화합니다.
   useEffect(() => {
     const initMap = async () => {
       while (!window.google || !window.google.maps || !window.google.maps.visualization) {
@@ -10,8 +12,9 @@ function MyMap() {
       }
 
       // 줌 레벨별 반경 조정
+      // 목적: 줌 레벨이 낮을수록 반경이 작아지며, 지도가 확대될수록 반경이 커집니다.
       const adjustRadiusByZoom = (zoomLevel) => {
-        if (zoomLevel <= 5) return 7;
+        if (zoomLevel <= 5) return 6;
         if (zoomLevel <= 6) return 7;
         if (zoomLevel <= 7) return 15;
         if (zoomLevel <= 8) return 20;
