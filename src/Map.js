@@ -14,20 +14,21 @@ function MyMap() {
       // 줌 레벨별 반경 조정
       // 목적: 줌 레벨이 낮을수록 반경이 작아지며, 지도가 확대될수록 반경이 커집니다.
       const adjustRadiusByZoom = (zoomLevel) => {
-        if (zoomLevel <= 5) return 6;
-        if (zoomLevel <= 6) return 7;
+        if (zoomLevel <= 5) return 5;  // 줌 레벨 5 이하: 매우 작은 반경
+        if (zoomLevel <= 6) return 10;
         if (zoomLevel <= 7) return 15;
         if (zoomLevel <= 8) return 20;
         if (zoomLevel <= 9) return 25;
-        if (zoomLevel <= 10) return 20;
-        if (zoomLevel <= 11) return 20;
-        if (zoomLevel <= 12) return 20;
-        if (zoomLevel <= 13) return 20;
-        if (zoomLevel <= 14) return 20;
-        if (zoomLevel <= 15) return 25;
-        if (zoomLevel <= 16) return 28;
-        return 30;
+        if (zoomLevel <= 10) return 30; // 줌 레벨 10 이상부터 점진적으로 증가
+        if (zoomLevel <= 11) return 35;
+        if (zoomLevel <= 12) return 40;
+        if (zoomLevel <= 13) return 45;
+        if (zoomLevel <= 14) return 50;
+        if (zoomLevel <= 15) return 55;
+        if (zoomLevel <= 16) return 60;
+        return 65; // 줌 레벨 16 이상: 가장 큰 반경
       };
+      // Recommondation of GPT. TODO: make it own
 
       // 줌 레벨별 maxIntensity 조정
       // 줌 레벨에 따라 히트맵의 maxIntensity를 동적으로 조정합니다.
