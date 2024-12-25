@@ -14,7 +14,7 @@ function MyMap() {
       // 줌 레벨별 반경 조정
       // 목적: 줌 레벨이 낮을수록 반경이 작아지며, 지도가 확대될수록 반경이 커집니다.
       const adjustRadiusByZoom = (zoomLevel) => {
-        if (zoomLevel <= 5) return 5;  // 줌 레벨 5 이하: 매우 작은 반경
+        if (zoomLevel <= 5) return 7;  // 줌 레벨 5 이하: 매우 작은 반경
         if (zoomLevel <= 6) return 10;
         if (zoomLevel <= 7) return 15;
         if (zoomLevel <= 8) return 20;
