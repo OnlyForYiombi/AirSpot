@@ -45,57 +45,63 @@ function MyMap() {
           5: 2.0,
           6: 1.8,
           7: 1.5,
-          8: 1.5,
+          8: 1.2,
           9: 1.1,
           10: 1.08,
           11: 1.05,
           12: 1.02,
           13: 1.01,
         };
-
-        const clusterSize = clusterSizes[zoom] || 0.1;
-
+      
+        const clusterSize = clusterSizes[zoom] || 0.5; // 적절한 기본 클러스터 크기 설정
         const clusters = {};
-
+      
         data.forEach(({ location, weight }) => {
           const latCluster = Math.floor(location.lat() / clusterSize) * clusterSize;
           const lngCluster = Math.floor(location.lng() / clusterSize) * clusterSize;
           const key = `${latCluster},${lngCluster}`;
-
+      
           if (!clusters[key]) {
             clusters[key] = { count: 0, totalWeight: 0, goodCount: 0, badCount: 0 };
           }
-
+      
           clusters[key].count += 1;
           clusters[key].totalWeight += weight;
-
+      
           if (weight <= 30) {
             clusters[key].goodCount += 1;
           } else {
             clusters[key].badCount += 1;
           }
         });
-
+      
         return Object.entries(clusters).map(([key, value]) => {
           const [lat, lng] = key.split(",").map(Number);
+      
+          // 클러스터 내 데이터 비율 계산
           const goodRatio = value.goodCount / value.count;
           const badRatio = value.badCount / value.count;
-
+      
+          // 가중치 정규화 및 제한
+          const normalizedWeight = Math.min(value.totalWeight / value.count, 100);
+      
+          // 가중치 결정
           let weight;
           if (badRatio >= 0.7) {
             weight = 80;
           } else if (goodRatio >= 0.7) {
             weight = 10;
           } else {
-            weight = 50;
+            weight = normalizedWeight; // 정규화된 가중치 사용
           }
-
+      
           return {
             location: new window.google.maps.LatLng(lat, lng),
             weight,
           };
         });
       };
+      
 
       const rawData = dummy();
 
