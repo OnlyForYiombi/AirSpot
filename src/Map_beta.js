@@ -126,11 +126,11 @@ function MyMap() {
             const updateHeatmap = () => {
               const zoom = map.getZoom();
               const heatmapData = clusterData(rawData, zoom);
-
+            
               if (heatmapLayer) {
                 heatmapLayer.setMap(null);
               }
-
+            
               heatmapLayer = new window.google.maps.visualization.HeatmapLayer({
                 data: heatmapData.map((d) => ({
                   location: d.location,
@@ -139,7 +139,7 @@ function MyMap() {
                 map,
                 radius: adjustRadiusByZoom(zoom),
                 opacity: 0.6,
-                maxIntensity: adjustMaxIntensityByZoom(zoom),
+                maxIntensity: adjustMaxIntensityByZoom(zoom), // 줌 수준에 따른 정규화된 최대값
                 gradient: [
                   "rgba(0, 255, 255, 0)",
                   "rgba(0, 0, 255, 0.4)",
@@ -150,7 +150,7 @@ function MyMap() {
                 ],
               });
             };
-
+            
             updateHeatmap();
 
             map.addListener("zoom_changed", updateHeatmap);
