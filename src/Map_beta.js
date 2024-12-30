@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import dummy from "./dummy";
 import "./Map.css";
 
-function MyMap() {
+function MyMap_beta() {
   useEffect(() => {
     const initMap = async () => {
       while (!window.google || !window.google.maps || !window.google.maps.visualization) {
@@ -184,3 +184,4 @@ function MyMap() {
 }
 
 export default MyMap_beta;
+

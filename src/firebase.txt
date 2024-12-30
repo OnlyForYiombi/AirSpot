@@ -1,0 +1,24 @@
+ const fetchData = async () => {
+        const snapshot = await getDocs(collection(firestore, "nodes")); // Firestore에서 데이터 가져오기
+        const data = [];
+        snapshot.forEach((doc) => {
+          const { latitude, longitude, pm25 } = doc.data();
+          data.push({
+            location: new window.google.maps.LatLng(latitude, longitude),
+            weight: pm25,
+          });
+        });
+        return data;
+      };
+
+      const heatmapData = await fetchData();
+
+      firebase 데이터 불러오기
+
+<미세먼지 2.5 기준>
+좋음	0~15㎍/㎥
+보통	16~35㎍/㎥
+나쁨	36~75㎍/㎥
+매우나쁨	76㎍/㎥
+
+
