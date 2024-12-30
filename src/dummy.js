@@ -32,8 +32,8 @@ function dummy() {
     };
 
     // 데이터 생성
-    const dongnamData = generateData(cheonanCenters.dongnam, 20, { min: 10, max: 35 }); // 동남구 데이터
-    const seobukData = generateData(cheonanCenters.seobuk, 20, { min: 40, max: 90 }); // 서북구 데이터
+    const dongnamData = generateData(cheonanCenters.dongnam, 40, { min: 10, max: 35 }); // 동남구 데이터
+    const seobukData = generateData(cheonanCenters.seobuk, 30, { min: 40, max: 90 }); // 서북구 데이터
 
     // 데이터 병합
     const dummyData = [...dongnamData, ...seobukData];

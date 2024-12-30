@@ -1,23 +1,20 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 import { getFirestore } from "firebase/firestore";
 
-
-// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDAHtNO9Bh72Sc03tcvt9qSxJgWpdV5D5A",
-  authDomain: "airspot-80dec.firebaseapp.com",
-  projectId: "airspot-80dec",
-  storageBucket: "airspot-80dec.firebasestorage.app",
-  messagingSenderId: "855533275611",
-  appId: "1:855533275611:web:41a6013a44e1a0a0f57ffe"
+  apiKey: "AIzaSyCm4zEyAgRORm-gNi0EiyOdGkdHNdbEnew",
+  authDomain: "micromeasurable-61820.firebaseapp.com",
+  projectId: "micromeasurable-61820",
+  storageBucket: "micromeasurable-61820.firebasestorage.app",
+  messagingSenderId: "752257809340",
+  appId: "1:752257809340:web:1ff733504f0b4e14c649b9"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
+// Initialize Firestore
 const firestore = getFirestore(app);
 
-export { firestore };
+// Export both app and firestore
+export { app, firestore };
