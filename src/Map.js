@@ -40,17 +40,17 @@ function MyMap() {
       // 줌 레벨에 따라 히트맵의 maxIntensity를 동적으로 조정합니다.
       // 목적: 줌 레벨이 낮으면 더 높은 밀도를 허용하고, 확대될수록 낮은 값을 사용합니다.
       const adjustMaxIntensityByZoom = (zoomLevel) => {
-        if (zoomLevel <= 5) return 5000; // 줌 레벨 5 이하: 최대 밀도
-        if (zoomLevel <= 6) return 4000; // 줌 레벨 6 이하: 최대 밀도
-        if (zoomLevel <= 7) return 3500; // 줌 레벨 7 이하: 최대 밀도
-        if (zoomLevel <= 8) return 3000;  // 줌 레벨 8
-        if (zoomLevel <= 9) return 2000;  // 줌 레벨 9
+        if (zoomLevel <= 5) return 10000; // 줌 레벨 5 이하: 최대 밀도
+        if (zoomLevel <= 6) return 8000; // 줌 레벨 6 이하: 최대 밀도
+        if (zoomLevel <= 7) return 7000; // 줌 레벨 7 이하: 최대 밀도
+        if (zoomLevel <= 8) return 6000;  // 줌 레벨 8
+        if (zoomLevel <= 9) return 4000;  // 줌 레벨 9
         if (zoomLevel <= 10) return 1000;  // 줌 레벨 10
-        if (zoomLevel <= 11) return 500;  // 줌 레벨 11
-        if (zoomLevel <= 12) return 200; // 줌 레벨 12
-        if (zoomLevel <= 13) return 120; // 줌 레벨 13
-        if (zoomLevel <= 14) return 100;  // 줌 레벨 14
-        if (zoomLevel <= 15) return 70;  // 줌 레벨 15
+        if (zoomLevel <= 11) return 700;  // 줌 레벨 11
+        if (zoomLevel <= 12) return 500; // 줌 레벨 12
+        if (zoomLevel <= 13) return 300; // 줌 레벨 13
+        if (zoomLevel <= 14) return 150;  // 줌 레벨 14
+        if (zoomLevel <= 15) return 90;  // 줌 레벨 15
         return 50;                      // 줌 레벨 16, 17이상: 세부 표현
       };
       //기본 14
@@ -115,9 +115,9 @@ function MyMap() {
         // Math.floor(location.lat() / clusterSize) * clusterSize는 클러스터의 중심점을 계산합니다.
         // 예를 들어, lat=37.7749, clusterSize=1.5라면, latCluster = 36.0과 같은 형태로 그룹화됩니다.
         data.forEach(({ location, weight }) => {
-          const latCluster = Math.floor(location.lat() / clusterSize) * clusterSize;
-          const lngCluster = Math.floor(location.lng() / clusterSize) * clusterSize;
-          const key = `${latCluster},${lngCluster}`;
+          let latCluster = Math.floor(location.lat() / clusterSize) * clusterSize;
+          let lngCluster = Math.floor(location.lng() / clusterSize) * clusterSize;
+          const key = ${latCluster},${lngCluster};
 
           if (!clusters[key]) {
             clusters[key] = { count: 0, totalWeight: 0, goodCount: 0, badCount: 0 };
@@ -147,7 +147,7 @@ function MyMap() {
           } else if (goodRatio >= 0.7) {
             weight = 10; // 파란색 (좋음 비율 높음)
           } else {
-            weight = 35; // 중간 상태
+            weight = 30; // 중간 상태
           }
 
           return {
@@ -230,7 +230,7 @@ function MyMap() {
             const initialData = dummy().filter((d) => d.time === timeData);
             updateHeatmap(initialData);
 
-            googleMap.addListener("zoom_changed", () => {
+            map.addListener("zoom_changed", () => {
               const zoomData = dummy().filter((d) => d.time === timeData);
               updateHeatmap(zoomData);
             });
